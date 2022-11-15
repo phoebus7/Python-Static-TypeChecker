@@ -1,0 +1,96 @@
+import java_cup.runtime.*;
+
+
+terminal INT, FLOAT, STR;
+terminal ASSIGNMENT;
+terminal ID; 
+terminal ADDITION, SUBSTRACTION, MULTIPLICATION, FLOATDIVISION, INTDIVISION, MODULO, DEGREE;
+terminal SHORTADDITION, SHORTSUBSTRACTION, SHORTMULTIPLICATION, SHORTFLOATDIVISION, SHORTINTDIVISION, SHORTMODULO, SHORTDEGREE;
+terminal COMMA;
+
+non terminal ASSIGN, AUGASSIGN;
+non terminal PROGRAM, ENDLINE, EOL, STMT;
+non terminal SUM, TERM, FACTOR, POWER;
+non terminal AWAIT_PRIMARY, PRIMARY, ATOM;
+//non terminal NAMED_EXPRESSION, STAR_NAMED_EXPRESSION, STAR_NAMED_EXPRESSIONS;
+
+precedence right ASSIGNMENT;
+precedence left ADDITION, SUBSTRACTION;
+precedence left MULTIPLICATION, FLOATDIVISION, INTDIVISION, MODULO, DEGREE;
+
+start with PROGRAM;
+
+PROGRAM ::= STMT ENDLINE STMT
+          | STMT ENDLINE
+		  | STMT
+   		  ;
+
+ENDLINE ::= ENDLINE EOL
+		  | EOL
+ 		  ;
+STMT ::= STMT ASSIGN
+	   | ASSIGN
+	   ;
+
+
+ASSIGN ::= ID ASSIGNMENT SUM  
+		 | ID AUGASSIGN SUM
+   		;
+
+AUGASSIGN ::= SHORTADDITION {: System.out.println("PARSER: augmented addition identified"); :}
+			| SHORTSUBSTRACTION {: System.out.println("PARSER: augmented substraction identified"); :}
+			| SHORTMULTIPLICATION {: System.out.println("PARSER: augmented multiplication identified"); :}
+			| SHORTFLOATDIVISION {: System.out.println("PARSER: augmented floatdivision identified"); :}
+			| SHORTINTDIVISION {: System.out.println("PARSER: augmented intdivision identified"); :}
+			| SHORTMODULO {: System.out.println("PARSER: augmented modulo identified"); :}
+			| SHORTDEGREE {: System.out.println("PARSER: augmented power identified"); :}
+			;
+
+SUM ::= SUM ADDITION TERM {: System.out.println("PARSER: sum + term identified"); :}
+	  | SUM SUBSTRACTION TERM {: System.out.println("PARSER: sum - term identified"); :}
+	  | TERM  
+	  ;
+
+TERM ::= TERM MULTIPLICATION FACTOR {: System.out.println("PARSER: term * factor identified"); :}
+	   | TERM FLOATDIVISION FACTOR {: System.out.println("PARSER: term / factor identified"); :}
+	   | TERM INTDIVISION FACTOR {: System.out.println("PARSER: term // factor identified"); :}
+	   | TERM MODULO FACTOR {: System.out.println("PARSER: term % factor identified"); :}
+	   | FACTOR 
+	   ;
+
+FACTOR ::= ADDITION FACTOR 
+		 | SUBSTRACTION FACTOR
+		 | POWER 
+		 ;
+
+POWER ::= AWAIT_PRIMARY DEGREE FACTOR {: System.out.println("PARSER: power identified"); :}
+		| AWAIT_PRIMARY 
+        ;
+
+AWAIT_PRIMARY ::= PRIMARY 
+				;
+
+PRIMARY ::= ATOM 
+		  ;
+
+ATOM ::= ID  
+	   | INT  
+	   | FLOAT 
+	   | STR 
+       ;
+/*
+STAR_NAMED_EXPRESSIONS ::= 
+						 | STAR_NAMED_EXPRESSION (COMMA STAR_NAMED_EXPRESSION)* 
+						 ;
+
+STAR_NAMED_EXPRESSION ::= 
+						| NAMED_EXPRESSION
+						;
+
+NAMED_EXPRESSION ::= 
+				   | 
+
+NAMED_EXPRESSION ::= 
+	   			   | ASSIGN
+				   ;
+*/
