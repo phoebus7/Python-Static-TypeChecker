@@ -9,6 +9,7 @@
 int = [+-]?[0-9]+ | [0][Bb][01]+ | [0][Xx][a-fA-F0-9]+ | [0][Oo][0-7]+
 float = [+-]?[0-9]*\.?[0-9]+([Ee][+-]?[0-9]+)?
 str = \'.*\' | \".*\"  
+bool = "True" | "False"
 id = [a-zA-Z_][a-zA-Z_0-9]*
 //whitespace = \r|\n|\r\n | [\t\f]
 newline = \r\n|\n\r
@@ -17,6 +18,7 @@ newline = \r\n|\n\r
 
 {int} {System.out.println("LEXER: int token: " + yytext()); }
 {float} {System.out.println("LEXER: float token: " + yytext());}
+{bool} {System.out.println("LEXER: bool token: " + yytext());}
 {str} {System.out.println("LEXER: str token: " + yytext()); }
 {id} {System.out.println("LEXER: id token: " + yytext()); }
 
