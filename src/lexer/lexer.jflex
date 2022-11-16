@@ -1,8 +1,7 @@
 import java_cup.runtime.*;
 
 %%
-%class Lexer
-%standalone
+%class Lexer %standalone
 %unicode
 %cup
 %line
@@ -56,6 +55,20 @@ id = [a-zA-Z_][a-zA-Z_0-9]*
 																					  new String(yytext()));}
 "," {System.out.println("LEXER: comma token: " + yytext()); return new Symbol(sym.COMMA, yyline, yycolumn, 
 																			new String(yytext()));}
+
+
+"==" {System.out.println("LEXER: equality token: " + yytext()); return new Symbol(sym.EQ, yyline, yycolumn,
+																				  new String(yytext()));}
+"!=" {System.out.println("LEXER: inequality token: " + yytext()); return new Symbol(sym.NE, yyline, yycolumn,
+																				  new String(yytext()));}
+">" {System.out.println("LEXER: greater than token: " + yytext()); return new Symbol(sym.GT, yyline, yycolumn,
+																				  new String(yytext()));}
+"<" {System.out.println("LEXER: less than token: " + yytext()); return new Symbol(sym.LT, yyline, yycolumn,
+																				  new String(yytext()));}
+">=" {System.out.println("LEXER: greater or equal token: " + yytext()); return new Symbol(sym.GE, yyline, yycolumn,
+																				  new String(yytext()));}
+"<=" {System.out.println("LEXER: less or equal token: " + yytext()); return new Symbol(sym.LE, yyline, yycolumn,
+																				  new String(yytext()));}
 
 
 {newline}|" "|\t {;}

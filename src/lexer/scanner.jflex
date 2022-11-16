@@ -38,6 +38,12 @@ newline = \r\n|\n\r
 "**" {System.out.println("LEXER: binary power token: " + yytext());}
 "**=" {System.out.println("LEXER: short power token: " + yytext());}
 "," {System.out.println("LEXER: comma token: " + yytext());}
+"==" {System.out.println("LEXER: equality token: " + yytext());}
+"!=" {System.out.println("LEXER: inequality token: " + yytext());}
+">" {System.out.println("LEXER: greater than token: " + yytext());}
+"<" {System.out.println("LEXER: less than token: " + yytext());}
+">=" {System.out.println("LEXER: greater or equal token: " + yytext());}
+"<=" {System.out.println("LEXER: less or equal token: " + yytext());}
 
 {newline}|" "|\t {;}
 
