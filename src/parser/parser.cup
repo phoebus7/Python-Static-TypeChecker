@@ -1,7 +1,7 @@
 import java_cup.runtime.*;
 
 
-terminal INT, FLOAT, STR;
+terminal INT, FLOAT, STR, BOOL;
 terminal ASSIGNMENT;
 terminal ID; 
 terminal ADDITION, SUBSTRACTION, MULTIPLICATION, FLOATDIVISION, INTDIVISION, MODULO, DEGREE;
@@ -76,6 +76,7 @@ PRIMARY ::= ATOM
 ATOM ::= ID  
 	   | INT  
 	   | FLOAT 
+	   | BOOL
 	   | STR 
        ;
 /*
