@@ -11,6 +11,7 @@ import java_cup.runtime.*;
 newline = \r\n|\n\r
 int = [+-]?[0-9]+ | [0][Bb][01]+ | [0][Xx][a-fA-F0-9]+ | [0][Oo][0-7]+
 float = [+-]?[0-9]*\.?[0-9]+([Ee][+-]?[0-9]+)?
+bool = "True" | "False"
 str = \'.*\' | \".*\" 
 id = [a-zA-Z_][a-zA-Z_0-9]*
 
@@ -19,6 +20,7 @@ id = [a-zA-Z_][a-zA-Z_0-9]*
 
 {int} {System.out.println("LEXER: int token: " + yytext()); return new Symbol(sym.INT, yyline, yycolumn, new String(yytext()));}
 {float} {System.out.println("LEXER: float token: " + yytext()); return new Symbol(sym.FLOAT, yyline, yycolumn, new String(yytext()));}
+{bool} {System.out.println("LEXER: bool token: " + yytext()); return new Symbol(sym.BOOL, yyline, yycolumn, new String(yytext()));}
 {str} {System.out.println("LEXER: str token: " + yytext()); return new Symbol(sym.STR, yyline, yycolumn, new String(yytext()));}
 {id} {System.out.println("LEXER: id token: " + yytext()); return new Symbol(sym.ID, yyline, yycolumn, new String(yytext()));}
 
