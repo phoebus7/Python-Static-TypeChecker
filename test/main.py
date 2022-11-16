@@ -7,3 +7,9 @@ a //= 0O6
 a %= 5
 a **= 3
 b =   False
+a == b
+a != b
+a >= b
+a <= b
+a > b
+a < b
