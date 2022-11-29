@@ -1,17 +1,20 @@
+import java.lang.*;
 import java_cup.runtime.*;
-
+import src.ast.expressions.*;
+import src.ast.expressions.*;
 
 terminal INT, FLOAT, STR, BOOL;
 terminal ASSIGNMENT;
 terminal ID; 
 terminal ADDITION, SUBSTRACTION, MULTIPLICATION, FLOATDIVISION, INTDIVISION, MODULO, DEGREE;
 terminal SHORTADDITION, SHORTSUBSTRACTION, SHORTMULTIPLICATION, SHORTFLOATDIVISION, SHORTINTDIVISION, SHORTMODULO, SHORTDEGREE;
+terminal EQ, NE, GT, LT, GE, LE;
 terminal COMMA;
 
 non terminal ASSIGN, AUGASSIGN;
 non terminal PROGRAM, ENDLINE, EOL, STMT;
-non terminal SUM, TERM, FACTOR, POWER;
-non terminal AWAIT_PRIMARY, PRIMARY, ATOM;
+non terminal SUM, TERM, FACTOR, POWER; non terminal AWAIT_PRIMARY, PRIMARY, ATOM;
+//non terminal Integer f;
 //non terminal NAMED_EXPRESSION, STAR_NAMED_EXPRESSION, STAR_NAMED_EXPRESSIONS;
 
 precedence right ASSIGNMENT;
@@ -48,7 +51,7 @@ AUGASSIGN ::= SHORTADDITION {: System.out.println("PARSER: augmented addition id
 
 SUM ::= SUM ADDITION TERM {: System.out.println("PARSER: sum + term identified"); :}
 	  | SUM SUBSTRACTION TERM {: System.out.println("PARSER: sum - term identified"); :}
-	  | TERM  
+	  | TERM 
 	  ;
 
 TERM ::= TERM MULTIPLICATION FACTOR {: System.out.println("PARSER: term * factor identified"); :}
@@ -73,11 +76,11 @@ AWAIT_PRIMARY ::= PRIMARY
 PRIMARY ::= ATOM 
 		  ;
 
-ATOM ::= ID  
-	   | INT  
-	   | FLOAT 
-	   | BOOL
-	   | STR 
+ATOM ::= ID
+	   | INT:i {: RESULT = new IntegerLiteral((Integer)i, 4, 2, "s"); :}
+	   | FLOAT:f {: RESULT = new FloatLiteral((Float)f, 4, 2, "s"); :}
+	   | BOOL:b {: RESULT = new BooleanLiteral((Boolean)b, 4, 2, "s"); :}
+	   | STR:s  {: RESULT = new StringLiteral((String)s, 4, 2, "s"); :}
        ;
 /*
 STAR_NAMED_EXPRESSIONS ::= 
