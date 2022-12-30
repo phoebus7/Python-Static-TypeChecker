@@ -1,11 +1,11 @@
 default: lexer parser
-	javac -cp .:CUP/java-cup-11b-runtime.jar -d src/classes src/java/*.java
+	javac -cp .:cup/java-cup-11b-runtime.jar -d src/classes src/java/*.java
 
 lexer:
 	jflex src/lexer/lexer.jflex
 	mv src/lexer/Lexer.java src/java/
 parser:
-	java -jar CUP/java-cup-11b.jar src/parser/parser.cup
+	java -jar cup/java-cup-11b.jar -dump_tables src/parser/parser.cup
 	mv *.java src/java/
 
 clean: 
