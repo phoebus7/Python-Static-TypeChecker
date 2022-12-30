@@ -1,19 +1,28 @@
 import java.lang.*;
 import java_cup.runtime.*;
-import src.ast.expressions.*;
-import src.ast.expressions.*;
+// import src.ast.expressions.*;
+// import src.ast.expressions.*;
 
+terminal AWAIT;
+terminal DISJUNCTION, CONJUNCTION, NEGATION;
+terminal BIT_AND, BIT_OR, BIT_XOR, BIT_INVERSION;
+terminal RIGHT_SHIFT, LEFT_SHIFT;
+terminal LSQB, RSQB, LPAR, RPAR, LBRACE, RBRACE;
+terminal COMMA, DOT, COLON, SEMICOLON;
+terminal IS, ISNOT, IN, NOTIN;
 terminal INT, FLOAT, STR, BOOL;
 terminal ASSIGNMENT;
-terminal ID; 
+terminal ID;
 terminal ADDITION, SUBSTRACTION, MULTIPLICATION, FLOATDIVISION, INTDIVISION, MODULO, DEGREE;
 terminal SHORTADDITION, SHORTSUBSTRACTION, SHORTMULTIPLICATION, SHORTFLOATDIVISION, SHORTINTDIVISION, SHORTMODULO, SHORTDEGREE;
 terminal EQ, NE, GT, LT, GE, LE;
-terminal COMMA;
+terminal NL;
+
 
 non terminal ASSIGN, AUGASSIGN;
 non terminal PROGRAM, ENDLINE, EOL, STMT;
-non terminal SUM, TERM, FACTOR, POWER; non terminal AWAIT_PRIMARY, PRIMARY, ATOM;
+non terminal SUM, TERM, FACTOR, POWER; 
+non terminal AWAIT_PRIMARY, PRIMARY, ATOM;
 //non terminal Integer f;
 //non terminal NAMED_EXPRESSION, STAR_NAMED_EXPRESSION, STAR_NAMED_EXPRESSIONS;
 
@@ -77,24 +86,11 @@ PRIMARY ::= ATOM
 		  ;
 
 ATOM ::= ID
-	   | INT:i {: RESULT = new IntegerLiteral((Integer)i, 4, 2, "s"); :}
-	   | FLOAT:f {: RESULT = new FloatLiteral((Float)f, 4, 2, "s"); :}
-	   | BOOL:b {: RESULT = new BooleanLiteral((Boolean)b, 4, 2, "s"); :}
-	   | STR:s  {: RESULT = new StringLiteral((String)s, 4, 2, "s"); :}
+	   | INT
+	   | FLOAT
+	   | BOOL
+	   | STR
        ;
-/*
-STAR_NAMED_EXPRESSIONS ::= 
-						 | STAR_NAMED_EXPRESSION (COMMA STAR_NAMED_EXPRESSION)* 
-						 ;
 
-STAR_NAMED_EXPRESSION ::= 
-						| NAMED_EXPRESSION
-						;
+NL ::= NL {} ;
 
-NAMED_EXPRESSION ::= 
-				   | 
-
-NAMED_EXPRESSION ::= 
-	   			   | ASSIGN
-				   ;
-*/
